@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 18:07:28 by fdikilu           #+#    #+#             */
-/*   Updated: 2017/02/09 14:38:21 by fdikilu          ###   ########.fr       */
+/*   Updated: 2017/02/04 19:51:58 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	print_tetri(t_list *point, char *soluce, char lettre, int s_width, in
 		str_index = ((int * )tmp->content)[1] * (s_width + 1) + ((int *)tmp->content)[0] + i;
 		if (str_index < ft_strlen(soluce))
 		{
-			if (soluce[str_index] == '.' && (print_tetri(tmp->next, soluce, lettre, s_width, i)) == 1)
+			if (soluce[str_index] == '.' && (print_tetri(tmp->next, soluce, lettre, s_width, i)) == 1) // rajout du == 1
 			{
 				soluce[str_index] = lettre;
 				return (1);
@@ -44,18 +44,14 @@ static int	place_tetri(t_tetri *tetriminos, char *soluce, int s_width, int i)
 	int		print;
 	t_list	*tmp;
 
-	if ((tmp = tetriminos->point))
-	{
-		print = print_tetri(tmp, soluce, tetriminos->lettre, s_width, i);
-		if (print == 1)
-			return (1);
-		else if (print == -1)
-			return (0);
-		else
-			return (place_tetri(tetriminos, soluce, s_width, i + 1));
-	}
-	else
+	tmp = tetriminos->point;
+	print = print_tetri(tmp, soluce, tetriminos->lettre, s_width, i);
+	if (print == 1)
+		return (1);
+	else if (print == -1)
 		return (0);
+	else
+		return (place_tetri(tetriminos, soluce, s_width, i + 1));
 }
 
 static int	solve(t_tetri **tab_tetri, char *soluce, int nb_tetri, int s_width, int *index)
@@ -78,24 +74,27 @@ static int	solve(t_tetri **tab_tetri, char *soluce, int nb_tetri, int s_width, i
 char		*create_soluce(t_tetri **tab_tetri, int nb_tetri, int s_width)
 {
 	int		*index;
-	int		length;
+	int		length; // <--- suppr
 	char	*soluce;
 
-	length = s_width * s_width + s_width;
-	if (!(soluce = (char *)malloc(sizeof(char) * length)))
+	length = s_width * s_width + s_width; // <-- suppr
+	if (!(soluce = (char *)malloc(sizeof(char) * length + 1)))
 		return (NULL);
 	ft_memset((void *)soluce, 46, length);
 	soluce[length] = '\0';
-	while (length--)
+	while (length--) //////////////////////// changer en fct pout la norme
 	{
 		if (length % (s_width + 1) == s_width)
 			soluce[length] = '\n';
-	}
+	} ///////////////////////////////////////
 	if (!(index = (int*)malloc(sizeof(int))))
 		return(NULL);
 	*index = 0;
 	if (solve(tab_tetri, soluce, nb_tetri, s_width, index))
+	{
+		free(index);
 		return (soluce);
+	}
 	else
 	{
 		free(index);
