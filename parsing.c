@@ -23,6 +23,7 @@ static t_tetri	*stock(char *buf, int ret)
 	tetriminos = NULL;
 	if (!(tetriminos = (t_tetri *)malloc(sizeof(*tetriminos))))
 		return (NULL);
+	tetriminos->point = NULL;
 	tmp = tetriminos;
 	while (ret--)
 	{
