@@ -23,6 +23,7 @@ int			main(int argc, char **argv)
 		ft_putstr("usage");
 		return (0);
 	}
+	soluce = NULL;
 	tab_tetri = NULL;
 	if (!file_check(argv[1]))
 	{
@@ -33,5 +34,12 @@ int			main(int argc, char **argv)
 	tab_tetri = parsing(argv[1]);
 	soluce = create_soluce(tab_tetri, nb_tetri - 1, 2);
 	ft_putstr(soluce);
+	while (nb_tetri--)
+	{
+		ft_lstclr(&tab_tetri[nb_tetri]->point);
+		free(tab_tetri[nb_tetri]);
+	}
+	free(tab_tetri);
+	free(soluce);
 	return (0);
 }
