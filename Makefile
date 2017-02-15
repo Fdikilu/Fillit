@@ -29,6 +29,7 @@ SRC =	libft/ft_putchar.c \
 		libft/ft_memcpy.c \
 		libft/ft_lstnew.c \
 		libft/ft_lstadd.c \
+		libft/ft_lstclr.c \
 		file_check.c \
 		nb_tetriminos.c \
 		parsing.c \
@@ -40,7 +41,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $? -o $@
+	$(CC) $? -o $@ -g
 
 %.o : %.c
 	$(CC) $(GFLAG) -o $@ -c $<
