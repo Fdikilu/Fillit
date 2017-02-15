@@ -66,10 +66,10 @@ int		file_check(char *file)
 		return (0);
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
-		buf[ret] = '\0';
-		if (!(test_buf(buf, ret)))
+			buf[ret] = '\0';
+			if (!(test_buf(buf, ret)))
 				return (0);
-		if (test_tetriminos(buf, ret) < 6)
+			if (test_tetriminos(buf, ret) < 6)
 				return (0);
 	}
 	if (close(fd) == -1)
