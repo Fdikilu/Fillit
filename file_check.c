@@ -6,13 +6,13 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 21:02:04 by fdikilu           #+#    #+#             */
-/*   Updated: 2017/02/03 17:56:11 by fdikilu          ###   ########.fr       */
+/*   Updated: 2017/02/16 12:41:47 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static int test_tetriminos(char *buf, int ret)
+static int	test_tetriminos(char *buf, int ret)
 {
 	int		cpt;
 
@@ -33,7 +33,7 @@ static int test_tetriminos(char *buf, int ret)
 	return (cpt);
 }
 
-static int test_buf(char *buf, int ret)
+static int	test_buf(char *buf, int ret)
 {
 	int		cpt1;
 	int		cpt2;
@@ -55,7 +55,7 @@ static int test_buf(char *buf, int ret)
 	return (1);
 }
 
-int		file_check(char *file)
+int			file_check(char *file)
 {
 	int		fd;
 	int		ret;
@@ -66,11 +66,11 @@ int		file_check(char *file)
 		return (0);
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
-			buf[ret] = '\0';
-			if (!(test_buf(buf, ret)))
-				return (0);
-			if (test_tetriminos(buf, ret) < 6)
-				return (0);
+		buf[ret] = '\0';
+		if (!(test_buf(buf, ret)))
+			return (0);
+		if (test_tetriminos(buf, ret) < 6)
+			return (0);
 	}
 	if (close(fd) == -1)
 		return (0);

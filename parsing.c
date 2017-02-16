@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 16:53:17 by fdikilu           #+#    #+#             */
-/*   Updated: 2017/02/04 20:09:29 by fdikilu          ###   ########.fr       */
+/*   Updated: 2017/02/16 13:01:02 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_tetri	*stock(char *buf, int ret)
 	return (tetriminos);
 }
 
-static void	init_tetri(t_tetri *tetriminos)
+static void		init_tetri(t_tetri *tetriminos)
 {
 	int		i;
 	int		x;
@@ -66,21 +66,19 @@ static void	init_tetri(t_tetri *tetriminos)
 	}
 }
 
-t_tetri			**parsing(char *file)
+t_tetri			**parsing(char *file, int i)
 {
-	int		i;
 	char	c;
 	int		fd;
 	int		ret;
 	char	buf[BUF_SIZE + 1];
 	t_tetri	**tab_tetri;
 
-	if(!(tab_tetri = malloc(sizeof(t_tetri *) * nb_tetriminos(file))))
+	if (!(tab_tetri = malloc(sizeof(t_tetri *) * nb_tetriminos(file))))
 		return (NULL);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
-	i = 0;
 	c = 'A';
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
@@ -94,26 +92,4 @@ t_tetri			**parsing(char *file)
 	if (close(fd) == -1)
 		return (NULL);
 	return (tab_tetri);
-}/*
-
-int main(int argc, char **argv)
-{
-	int i = 0;
-	int j = 0;
-	int nb_tetri = nb_tetriminos(argv[1]);
-	t_tetri **tab_tetri = parsing(argv[1]);
-
-	while (i < nb_tetri)
-	{
-		printf("%c\n", tab_tetri[i]->lettre);
-		while (j < 4)
-		{
-			printf("|%d :", ((int *)tab_tetri[i]->point->content)[0]);
-			printf(" %d|\n", ((int *)tab_tetri[i]->point->content)[1]);
-			tab_tetri[i]->point = tab_tetri[i]->point->next;
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-}*/
+}
