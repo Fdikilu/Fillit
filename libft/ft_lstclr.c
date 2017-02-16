@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 15:43:35 by fdikilu           #+#    #+#             */
-/*   Updated: 2017/02/15 15:43:42 by fdikilu          ###   ########.fr       */
+/*   Updated: 2017/02/16 12:48:40 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_lstclr(t_list **begin_list)
 {
 	t_list	*elem;
-	
+
 	elem = *begin_list;
 	while (elem != NULL)
 	{
