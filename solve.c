@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/31 18:07:28 by fdikilu           #+#    #+#             */
-/*   Updated: 2017/02/16 16:58:24 by fdikilu          ###   ########.fr       */
+/*   Updated: 2017/02/19 18:08:54 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	print_tetri(t_list *point, char *soluce, char lettre, int *tab_arg)
 {
 	int		str_index;
+	int		print;
 	t_list	*tmp;
 
 	tmp = point;
@@ -24,19 +25,23 @@ static int	print_tetri(t_list *point, char *soluce, char lettre, int *tab_arg)
 	{
 		str_index = ((int *)tmp->content)[1] *
 			(tab_arg[0] + 1) + ((int *)tmp->content)[0] + tab_arg[1];
-		if (str_index < ft_strlen(soluce))
+		if (str_index >= ft_strlen(soluce))
+			return (-1);
+		if (soluce[str_index] == '.')
 		{
-			if (soluce[str_index] == '.' \
-				&& (print_tetri(tmp->next, soluce, lettre, tab_arg)) == 1)
+			print = print_tetri(tmp->next, soluce, lettre, tab_arg);
+			if (print == 1)
 			{
 				soluce[str_index] = lettre;
 				return (1);
 			}
-			else
+			else if (print == 0)
 				return (0);
+			else
+				return (-1);
 		}
 		else
-			return (-1);
+			return (0);
 	}
 }
 
@@ -83,8 +88,9 @@ int			solve(t_tetri **tab_tetri, \
 	{
 		while (i < (tab_arg[1] * tab_arg[1] + tab_arg[1]))
 		{
-			if (place_tetri(tab_tetri[index_tab], soluce, tab_arg[1], i) \
-				&& solve(tab_tetri, soluce, index_tab + 1, tab_arg))
+			if (!(place_tetri(tab_tetri[index_tab], soluce, tab_arg[1], i)))
+				return (0);
+			if (solve(tab_tetri, soluce, index_tab + 1, tab_arg))
 				return (1);
 			i++;
 			rm_bad_tetri(soluce, tab_tetri[index_tab]->lettre);

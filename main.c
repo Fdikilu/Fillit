@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 16:48:30 by fdikilu           #+#    #+#             */
-/*   Updated: 2017/02/16 16:37:54 by fdikilu          ###   ########.fr       */
+/*   Updated: 2017/02/16 21:06:28 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			main(int argc, char **argv)
 		return (0);
 	}
 	tab_arg[0] = nb_tetriminos(argv[1]) - 1;
-	tab_arg[1] = 2;
+	tab_arg[1] = min_width(nb_tetriminos(argv[1]) - 1);
 	tab_tetri = parsing(argv[1], 0);
 	soluce = create_soluce(tab_tetri, tab_arg);
 	ft_putstr(soluce);

@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 21:02:04 by fdikilu           #+#    #+#             */
-/*   Updated: 2017/02/16 12:41:47 by fdikilu          ###   ########.fr       */
+/*   Updated: 2017/02/19 13:51:25 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	test_buf(char *buf, int ret)
 		cpt2 = (buf[ret] == '.') ? cpt2 + 1 : cpt2;
 		cpt3 = (buf[ret] == '\n') ? cpt3 + 1 : cpt3;
 	}
-	if (cpt1 != 4 || cpt2 != 12 || cpt3 != 5)
+	if (cpt1 != 4 || cpt2 != 12 || cpt3 < 4)
 		return (0);
 	return (1);
 }

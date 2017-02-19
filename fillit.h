@@ -31,6 +31,7 @@ typedef struct		s_tetri
 int					file_check(char *file);
 int					nb_tetriminos(char *file);
 t_tetri				**parsing(char *file, int i);
+int					min_width(int nb_tetri);
 int					solve(t_tetri **tab_tetri, char *soluce, \
 	int index, int *tab_arg);
 char				*create_soluce(t_tetri **tab_tetri, int *tab_arg);

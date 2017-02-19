@@ -6,7 +6,7 @@
 #    By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 20:29:49 by fdikilu           #+#    #+#              #
-#    Updated: 2017/02/16 13:16:12 by fdikilu          ###   ########.fr        #
+#    Updated: 2017/02/16 19:05:25 by fdikilu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC =	libft/ft_putchar.c \
 		parsing.c \
 		solve.c \
 		create_soluce.c \
+		soluce_width.c \
 		main.c \
 
 OBJ = $(SRC:.c=.o)
