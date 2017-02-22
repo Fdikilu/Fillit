@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 20:41:20 by fdikilu           #+#    #+#             */
-/*   Updated: 2017/02/19 16:37:59 by fdikilu          ###   ########.fr       */
+/*   Updated: 2017/02/22 01:29:36 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			min_width(int nb_tetri)
 	int		i;
 
 	i = 2;
-	while(i <= 10)
+	while (i <= 10)
 	{
 		if ((nb_tetri + 1) * 4 <= i * i)
 			return (i);
