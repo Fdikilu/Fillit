@@ -6,7 +6,7 @@
 /*   By: fdikilu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 21:02:04 by fdikilu           #+#    #+#             */
-/*   Updated: 2017/02/19 13:51:25 by fdikilu          ###   ########.fr       */
+/*   Updated: 2017/02/23 19:29:48 by fdikilu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static int	test_buf(char *buf, int ret)
 	cpt1 = 0;
 	cpt2 = 0;
 	cpt3 = 0;
+	if (buf[0] == '\n')
+		return (0);
 	while (ret--)
 	{
 		if (buf[ret] != '.' && buf[ret] != '#' && buf[ret] != '\n')
@@ -57,21 +59,26 @@ static int	test_buf(char *buf, int ret)
 
 int			file_check(char *file)
 {
+	int		nb_tetri;
 	int		fd;
 	int		ret;
 	char	buf[BUF_SIZE + 1];
 
+	nb_tetri = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (0);
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
 		buf[ret] = '\0';
-		if (!(test_buf(buf, ret)))
+		if (nb_tetri == nb_tetriminos(file) - 1 && ret != 20)
 			return (0);
-		if (test_tetriminos(buf, ret) < 6)
+		if (!(test_buf(buf, ret)) || test_tetriminos(buf, ret) < 6)
 			return (0);
+		nb_tetri++;
 	}
+	if (nb_tetri == 0 && ret == 0)
+		return (0);
 	if (close(fd) == -1)
 		return (0);
 	return (1);
